@@ -17,6 +17,7 @@ var circleAnimation = function(){
 	    s.removeChild(s.lastChild);
 	}
 	var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+	
 	c.setAttribute("cx", width/2);
 	c.setAttribute("cy", height/2);
 	c.setAttribute("fill","blue");
@@ -39,16 +40,25 @@ var DVDAnimation = function(){
     window.cancelAnimationFrame(rid);
     
     var DVDfunc = function(){
+	while (s.lastChild){
+	    s.removeChild(s.lastChild);
+	}
 	x += xinc;
 	y += yinc;
 	
-	if (x == -10 || x == width-140)
+	var i = document.createElementNS("http://www.w3.org/2000/svg", "image");
+	i.setAttribute("href", "dvd.jpg");
+	i.setAttribute("x",x);
+	i.setAttribute("y",y);
+	i.setAttribute("height","75");
+	i.setAttribute("width","125");
+	s.appendChild(i);
+
+	if (x == -10 || x == width - 120)
 	    xinc *= -1;
-	if (y == -20 || y == height-80)
+	if (y == -15 || y == height - 60)
 	    yinc *= -1;
 	
-	ctx.closePath();
-	ctx.stroke();
 	rid = window.requestAnimationFrame( DVDfunc );
     };
     DVDfunc();
